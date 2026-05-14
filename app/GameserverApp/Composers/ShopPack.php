@@ -1,15 +1,12 @@
 <?php
 namespace GameserverApp\Composers;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 use GameserverApp\Api\Client;
-use GameserverApp\Api\OAuthApi;
 
 class ShopPack
 {
-    /**
-     * @var Client
-     */
     private $api;
 
     public function __construct()
@@ -19,8 +16,12 @@ class ShopPack
 
     public function compose(View $view)
     {
+        $id = $view->getData()['value'];
+
         try {
-            $data = $this->api->shopItem($view->getData()['value']);
+            $data = Cache::remember('shop_pack_' . $id, now()->addMinutes(config('gameserverapp.cache.shop_pack_ttl', 10)), function () use ($id) {
+                return $this->api->shopItem($id);
+            });
         } catch(\Throwable $e) {
             $data = false;
         }

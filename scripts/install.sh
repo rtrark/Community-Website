@@ -53,7 +53,7 @@ wget https://raw.githubusercontent.com/composer/getcomposer.org/76a7060ccb93902c
 mv composer.phar /usr/local/bin/composer
 
 rm -rf /var/www/*;
-git clone https://github.com/GameserverApp/Community-Website.git /var/www;
+git clone https://github.com/rtrark/Community-Website.git /var/www;
 
 mkdir -p /var/www/public/js
 touch /var/www/public/js/app.js

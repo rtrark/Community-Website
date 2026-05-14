@@ -8,6 +8,7 @@ use App\Http\Middleware\HttpRedirect;
 use App\Http\Middleware\RequestHasValidIdWithSlug;
 use App\Http\Middleware\RequestHasValidUuidAsID;
 use App\Http\Middleware\RuleGate;
+use App\Http\Middleware\TrustReverseProxy;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -20,6 +21,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
+        TrustReverseProxy::class,
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         CheckDomainSettings::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
