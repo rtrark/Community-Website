@@ -16,7 +16,8 @@ return [
         'default_cache_ttl' => env('DEFAULT_CACHE_TTL', 3 + floatval('0.0' . rand(1,9)) ),
         'get_user_ttl' => 0.5,
         'tribe_background' => 20,
-        'shop_pack_ttl' => env('SHOP_PACK_CACHE_TTL', 10)
+        'shop_pack_ttl' => env('SHOP_PACK_CACHE_TTL', 10),
+        'warm_shop_pack_ids' => env('SHOP_PACK_WARM_IDS', '')
     ],
 
     'pagebuilder' => [

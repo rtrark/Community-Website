@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Cache;
 use GameserverApp\Api\Client;
 use GameserverApp\Helpers\PremiumHostedHelper;
 
@@ -125,6 +126,29 @@ class WarmCache extends Command
 
             Bugsnag::leaveBreadcrumb('Domain: ' . config('gameserverapp.oauthapi_domain'));
 //            Bugsnag::notifyException($e);
+        }
+
+        $this->warmShopPacks();
+    }
+
+    private function warmShopPacks()
+    {
+        $ids = array_filter(array_map('trim', explode(',', config('gameserverapp.cache.warm_shop_pack_ids', ''))));
+
+        foreach(array_unique($ids) as $id) {
+            if(!is_numeric($id)) {
+                continue;
+            }
+
+            try {
+                $this->info(' - warmed "shopItem" ' . $id);
+                Cache::forget('shop_pack_' . $id);
+                Cache::remember('shop_pack_' . $id, now()->addMinutes(config('gameserverapp.cache.shop_pack_ttl', 10)), function () use ($id) {
+                    return $this->client->shopItem($id);
+                });
+            } catch (\Exception $e) {
+
+            }
         }
     }
 
