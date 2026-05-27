@@ -57,6 +57,7 @@
 - `cache:warm` can pre-warm slow pagebuilder shop blocks with `SHOP_PACK_WARM_IDS=3,9,...` so first real users do not pay the serial GSA API cost.
 - Nginx test stack sends gzip plus one-year immutable cache headers for static assets.
 - Shop package images use native lazy loading and async decoding.
+- Nginx forwards HTTPS/SERVER_PORT from `X-Forwarded-Proto` so public Caddy/Cloudflare HTTPS and local HTTP both generate correct URLs.
 - Official installer now clones `rtrark/Community-Website` instead of upstream.
 - Docker dev stack added; web binds `127.0.0.1:8080` only for safe parallel testing.
 - Node-sass 4 + Node version is brittle; pin Node 14.19.0.
