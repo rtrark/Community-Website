@@ -127,7 +127,7 @@ use PremiumARK\Sales\Sale;
                                     @endif
 
                                 @elseif($invoice->discount()->amount > 0)
-                                    (Incl. max. {{$invoice->currency()}} {{ $invoice->discount->amount() }} discount)
+                                    (Incl. max. {{$invoice->currency()}} {{ $invoice->discount()->amount }} discount)
                                 @else
                                     Incl. {{ $invoice->discount()->percentage }}% discount
                                 @endif
