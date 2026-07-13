@@ -11,7 +11,7 @@
         </div>
         <a href="{{route('shop.show', $item->id)}}">
             <div class="image-container">
-                <img src="{{$item->image()}}" alt="{{$item->name()}}" loading="lazy" decoding="async">
+                <img src="{{$item->image()}}" alt="{{$item->name()}}">
             </div>
 
 
